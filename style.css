@@ -69,4 +69,12 @@ body { font-family: var(--font-primary); background-color: var(--color-bg); colo
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 /* Print Styles */
-@media print { /* ... (Print styles are unchanged) ... */ }
+@media print { body { background-color: #fff; }
+    .editor-panel { display: none; }
+    .preview-panel { padding: 0; }
+    .app-container { display: block; }
+    .resume-document { box-shadow: none; margin: 0; max-width: 100%; padding: 0; font-size: 10pt; }
+    #resume-name { font-size: 24pt; }
+    #resume-title { font-size: 12pt; }
+    .resume-section h2 { font-size: 14pt; color: var(--color-accent) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .resume-document.modern .resume-header { background-color: var(--color-accent) !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
