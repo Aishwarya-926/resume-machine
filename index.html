@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 16: Omega Resume Builder (AI-Powered)</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="app-container">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <header class="editor-header">
+                <h2>Resume Editor</h2>
+                <div class="header-actions">
+                    <button id="print-btn">🖨️ Print / Save as PDF</button>
+                </div>
+            </header>
+
+            <div class="data-management-panel">
+                <button id="import-btn">Import JSON</button>
+                <button id="export-btn">Export JSON</button>
+                <button id="sample-btn">Load Sample</button>
+                <button id="reset-btn">Clear All</button>
+                <input type="file" id="import-file" class="hidden">
+            </div>
+
+            <div class="customization-panel">
+                <div class="form-group">
+                    <label for="template-select">Template</label>
+                    <select id="template-select">
+                        <option value="classic">Classic</option>
+                        <option value="modern">Modern</option>
+                        <option value="compact">Compact</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color-picker">Accent Color</label>
+                    <input type="color" id="color-picker" value="#007bff">
+                </div>
+            </div>
+
+            <form id="resume-form">
+                <section><h3>Personal Details</h3><!-- ... --></section>
+                <section><h3>Work Experience</h3><!-- ... --></section>
+                <section><h3>Education</h3><!-- ... --></section>
+                <section><h3>Skills</h3><!-- ... --></section>
+            </form>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <div id="resume-preview" class="resume-document classic">
+                <!-- Resume content will be dynamically generated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Templates -->
+    <template id="section-template">
+        <div class="form-content"></div>
+        <div class="section-actions">
+            <button type="button" class="add-btn">Add Entry</button>
+        </div>
+    </template>
+    
+    <template id="experience-template">
+        <div class="entry" draggable="true">
+            <span class="drag-handle">::</span>
+            <div class="entry-content">
+                <input type="text" placeholder="Job Title" class="job-title" name="exp-job-title">
+                <input type="text" placeholder="Company" class="company" name="exp-company">
+                <input type="text" placeholder="Dates (e.g., Jan 2020 - Present)" class="dates" name="exp-dates">
+                <textarea placeholder="Job Description (use '-' for bullet points)..." name="exp-desc"></textarea>
+                <div class="entry-actions">
+                    <button type="button" class="ai-generate-btn">✨ Generate with AI</button>
+                    <button type="button" class="remove-btn">&times;</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="education-template">
+        <div class="entry" draggable="true">
+            <span class="drag-handle">::</span>
+            <div class="entry-content">
+                <input type="text" placeholder="Degree / Certificate" class="degree" name="edu-degree">
+                <input type="text" placeholder="Institution" class="institution" name="edu-institution">
+                <input type="text" placeholder="Year of Completion" class="year" name="edu-year">
+            </div>
+            <button type="button" class="remove-btn">&times;</button>
+        </div>
+    </template>
+
+    <!-- Loading Overlay for AI -->
+    <div id="loading-overlay" class="hidden">
+        <div class="spinner"></div>
+        <p>Generating with AI...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
