@@ -1,0 +1,72 @@
+:root {
+    --font-primary: 'Roboto', sans-serif; --font-secondary: 'Lora', serif; --font-modern: 'Montserrat', sans-serif;
+    --color-bg: #f0f4f8; --color-editor-bg: #ffffff; --color-preview-bg: #ffffff; --color-text: #333333;
+    --color-border: #dee2e6; --color-accent: #007bff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-primary); background-color: var(--color-bg); color: var(--color-text); }
+.hidden { display: none !important; }
+
+/* Main Layout & Editor */
+.app-container { display: grid; grid-template-columns: 1fr 1.2fr; min-height: 100vh; }
+.editor-panel { background-color: var(--color-editor-bg); padding: 2rem; overflow-y: auto; }
+.editor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.header-actions button { background-color: var(--color-accent); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 5px; cursor: pointer; font-weight: 500; }
+
+.data-management-panel { display: flex; flex-wrap: wrap; gap: 0.5rem; background-color: #f8f9fa; padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; }
+.data-management-panel button { flex-grow: 1; background-color: #6c757d; color: white; border: none; padding: 0.5rem; border-radius: 4px; cursor: pointer; }
+.data-management-panel #reset-btn { background-color: #dc3545; }
+
+.customization-panel { display: flex; gap: 2rem; background-color: #f8f9fa; padding: 1rem; border-radius: 5px; margin-bottom: 2rem; align-items: center; }
+.form-group { flex: 1; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+#template-select, #color-picker { width: 100%; padding: 0.5rem; border: 1px solid var(--color-border); border-radius: 4px; }
+#color-picker { height: 38px; padding: 2px; }
+
+#resume-form section { margin-bottom: 1rem; }
+#resume-form h3 { border-bottom: 2px solid var(--color-accent); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+#resume-form input, #resume-form textarea { width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 4px; margin-bottom: 0.75rem; font-family: inherit; font-size: 1rem; }
+#resume-form textarea { resize: vertical; min-height: 100px; }
+.section-actions { margin-top: 1rem; }
+.add-btn { background: none; border: 1px dashed var(--color-accent); color: var(--color-accent); padding: 0.5rem; width: 100%; cursor: pointer; border-radius: 4px; font-weight: 600; }
+
+.entry { display: flex; align-items: flex-start; gap: 0.5rem; border: 1px solid var(--color-border); padding: 1rem; margin-bottom: 1rem; border-radius: 4px; background-color: #fdfdfd; }
+.entry.dragging { opacity: 0.5; }
+.entry-content { flex-grow: 1; }
+.drag-handle { cursor: grab; padding: 0.5rem; font-size: 1.5rem; color: #adb5bd; }
+.remove-btn { background-color: transparent; color: #dc3545; border: none; width: 30px; height: 30px; cursor: pointer; border-radius: 50%; font-weight: bold; font-size: 1.5rem; line-height: 1; padding: 0; }
+.entry-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
+.ai-generate-btn { background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 600; }
+
+/* Preview Panel & Templates */
+.preview-panel { padding: 2rem; background-color: var(--color-bg); }
+.resume-document { background-color: var(--color-preview-bg); box-shadow: 0 0 20px rgba(0,0,0,0.15); padding: 3rem; max-width: 8.5in; min-height: 11in; margin: 0 auto; transition: all 0.3s; }
+/* ... (Template styles from previous version are unchanged) ... */
+.resume-document.classic { font-family: var(--font-secondary); }
+.classic .resume-header { text-align: center; margin-bottom: 2rem; }
+.classic #resume-name { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.classic .resume-section h2 { font-size: 1.3rem; color: var(--color-accent); border-bottom: 2px solid #333; padding-bottom: 0.3rem; margin-bottom: 1rem; }
+.resume-document.modern { font-family: var(--font-modern); }
+.modern .resume-header { background-color: var(--color-accent); color: white; padding: 2rem; margin: -3rem -3rem 2rem -3rem; }
+.modern #resume-name { font-size: 3rem; }
+.modern .resume-section h2 { font-size: 1.1rem; color: var(--color-accent); }
+.resume-document.compact { font-family: var(--font-primary); font-size: 0.9rem; }
+.compact .resume-header { border-bottom: 2px solid var(--color-accent); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+.compact #resume-name { font-size: 2rem; }
+.compact .resume-section h2 { font-size: 1rem; color: var(--color-accent); }
+/* ... (General styles for entries/skills are unchanged) ... */
+.resume-entry { margin-bottom: 1rem; }
+.resume-entry h4 { font-size: 1.1rem; }
+.sub-heading { display: flex; justify-content: space-between; font-weight: 500; }
+.resume-entry ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+#resume-skills { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; }
+#resume-skills li { background-color: #e9ecef; color: #333; padding: 0.25rem 0.75rem; border-radius: 15px; }
+
+/* Loading Overlay */
+#loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; color: white; }
+.spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid var(--color-accent); border-radius: 50%; animation: spin 1s linear infinite; }
+#loading-overlay p { margin-top: 1rem; font-size: 1.2rem; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Print Styles */
+@media print { /* ... (Print styles are unchanged) ... */ }
