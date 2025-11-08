@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 16: Omega Resume Builder (AI-Powered)</title>
+    <title>Day 16: Pro Resume Builder</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -14,17 +14,10 @@
             <header class="editor-header">
                 <h2>Resume Editor</h2>
                 <div class="header-actions">
+                    <button id="reset-btn">Clear All</button>
                     <button id="print-btn">🖨️ Print / Save as PDF</button>
                 </div>
             </header>
-
-            <div class="data-management-panel">
-                <button id="import-btn">Import JSON</button>
-                <button id="export-btn">Export JSON</button>
-                <button id="sample-btn">Load Sample</button>
-                <button id="reset-btn">Clear All</button>
-                <input type="file" id="import-file" class="hidden">
-            </div>
 
             <div class="customization-panel">
                 <div class="form-group">
@@ -42,10 +35,28 @@
             </div>
 
             <form id="resume-form">
-                <section><h3>Personal Details</h3><!-- ... --></section>
-                <section><h3>Work Experience</h3><!-- ... --></section>
-                <section><h3>Education</h3><!-- ... --></section>
-                <section><h3>Skills</h3><!-- ... --></section>
+                <section>
+                    <h3>Personal Details</h3>
+                    <input type="text" id="name" placeholder="Full Name" data-target="resume-name">
+                    <input type="text" id="title" placeholder="Job Title (e.g., Senior Web Developer)" data-target="resume-title">
+                    <input type="email" id="email" placeholder="Email" data-target="resume-email">
+                    <input type="tel" id="phone" placeholder="Phone" data-target="resume-phone">
+                    <textarea id="summary" placeholder="Professional Summary..." data-target="resume-summary"></textarea>
+                </section>
+                <section>
+                    <h3>Work Experience</h3>
+                    <div id="experience-entries" class="draggable-list"></div>
+                    <button type="button" class="add-btn" data-section="experience">Add Experience</button>
+                </section>
+                <section>
+                    <h3>Education</h3>
+                    <div id="education-entries" class="draggable-list"></div>
+                    <button type="button" class="add-btn" data-section="education">Add Education</button>
+                </section>
+                <section>
+                    <h3>Skills</h3>
+                    <input type="text" id="skills" placeholder="Comma-separated skills (e.g., HTML, CSS, JavaScript)" data-target="resume-skills">
+                </section>
             </form>
         </div>
 
@@ -57,47 +68,30 @@
         </div>
     </main>
 
-    <!-- Templates -->
-    <template id="section-template">
-        <div class="form-content"></div>
-        <div class="section-actions">
-            <button type="button" class="add-btn">Add Entry</button>
-        </div>
-    </template>
-    
+    <!-- Templates for dynamic entries -->
     <template id="experience-template">
         <div class="entry" draggable="true">
             <span class="drag-handle">::</span>
             <div class="entry-content">
-                <input type="text" placeholder="Job Title" class="job-title" name="exp-job-title">
-                <input type="text" placeholder="Company" class="company" name="exp-company">
-                <input type="text" placeholder="Dates (e.g., Jan 2020 - Present)" class="dates" name="exp-dates">
-                <textarea placeholder="Job Description (use '-' for bullet points)..." name="exp-desc"></textarea>
-                <div class="entry-actions">
-                    <button type="button" class="ai-generate-btn">✨ Generate with AI</button>
-                    <button type="button" class="remove-btn">&times;</button>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <template id="education-template">
-        <div class="entry" draggable="true">
-            <span class="drag-handle">::</span>
-            <div class="entry-content">
-                <input type="text" placeholder="Degree / Certificate" class="degree" name="edu-degree">
-                <input type="text" placeholder="Institution" class="institution" name="edu-institution">
-                <input type="text" placeholder="Year of Completion" class="year" name="edu-year">
+                <input type="text" placeholder="Job Title" class="job-title">
+                <input type="text" placeholder="Company" class="company">
+                <input type="text" placeholder="Dates (e.g., Jan 2020 - Present)" class="dates">
+                <textarea placeholder="Job Description (use '-' for bullet points)..."></textarea>
             </div>
             <button type="button" class="remove-btn">&times;</button>
         </div>
     </template>
-
-    <!-- Loading Overlay for AI -->
-    <div id="loading-overlay" class="hidden">
-        <div class="spinner"></div>
-        <p>Generating with AI...</p>
-    </div>
+    <template id="education-template">
+        <div class="entry" draggable="true">
+            <span class="drag-handle">::</span>
+            <div class="entry-content">
+                <input type="text" placeholder="Degree / Certificate" class="degree">
+                <input type="text" placeholder="Institution" class="institution">
+                <input type="text" placeholder="Year of Completion" class="year">
+            </div>
+            <button type="button" class="remove-btn">&times;</button>
+        </div>
+    </template>
 
     <script src="script.js"></script>
 </body>
