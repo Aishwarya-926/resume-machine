@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- API Configuration ---
     // IMPORTANT: Replace with your actual API key from OpenAI or another provider.
-    const API_KEY = 'YOUR_API_KEY_HERE';
+    const API_KEY = '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';
     const API_URL = 'https://api.openai.com/v1/chat/completions'; // Example for OpenAI
 
     // --- Selectors ---
